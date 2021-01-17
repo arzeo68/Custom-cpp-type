@@ -75,6 +75,27 @@ class Vec2
         y *= rhs.y;
     };
 
+    void operator+=(t nb)
+    {
+        x += nb;
+        y += nb;
+    };
+    void operator-=(t nb)
+    {
+        x -= nb;
+        y -= nb;
+    };
+    void operator*=(t nb)
+    {
+        x *= nb;
+        y *= nb;
+    };
+    void operator/=(t nb)
+    {
+        x /= nb;
+        y /= nb;
+    };
+
     Vec2 operator+(const Vec2 &rhs) const
     {
         return Vec2<t>(x + rhs.y, x + rhs.y);
@@ -95,6 +116,26 @@ class Vec2
         return Vec2<t>(x / rhs.y, x / rhs.y);
     };
 
+    Vec2 operator+(t nb) const
+    {
+        return Vec2<t>(x + nb, x + nb);
+    };
+
+    Vec2 operator-(t nb) const
+    {
+        return Vec2<t>(x - nb, x - nb);
+    };
+
+    Vec2 operator*(t nb) const
+    {
+        return Vec2<t>(x * nb, x * nb);
+    };
+
+    Vec2 operator/(t nb) const
+    {
+        return Vec2<t>(x / nb, x / nb);
+    };
+
     float dist(const Vec2 &rhs) const
     {
         return abs(sqrt(pow(rhs.x - x, 2) + pow(rhs.y - y, 2)));
@@ -110,7 +151,7 @@ class Vec2
         y = cpy.x + diff.x * _sin + diff.y * _cos;
     }
 
-    void GetCoordinaterotatedAround(const Vec2 &rhs, float radiant)
+    void GetCoordinaterotatedAround(const Vec2 &rhs, float radiant) const
     {
         Vec2 cpy = rhs;
         Vec2 diff = this - rhs;
@@ -119,7 +160,7 @@ class Vec2
         return cpy + Vec2(diff.x * _cos - diff.y * _sin, diff.x * _sin + diff.y * _cos);
     }
 
-    Vec2 linearInterpolation(const Vec2 &rhs, float percent) // percent must be a value between 0 and 1
+    Vec2 linearInterpolation(const Vec2 &rhs, t percent) // percent must be a value between 0 and 1
     {
         if (percent < 0 || percent > 1)
             return Vec2(0,0);

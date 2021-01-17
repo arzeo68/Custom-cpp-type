@@ -6,7 +6,7 @@
 #define VEC2_VEC2_HPP
 
 #include <ostream>
-#define _USE_MATH_DEFINES
+#define PI 3.14159265358979323846
 #include <cmath>
 
 template<class t>
@@ -100,10 +100,36 @@ class Vec2
         return abs(sqrt(pow(rhs.x - x, 2) + pow(rhs.y - y, 2)));
     };
 
+    void rotateAround(const Vec2 &rhs, float radiant)
+    {
+        Vec2 cpy = rhs;
+        Vec2 diff = this - rhs;
+        float _cos = cos(radiant);
+        float _sin = sin(radiant);
+        x = cpy.x + diff.x * _cos - diff.y * _sin;
+        y = cpy.x + diff.x * _sin + diff.y * _cos;
+    }
+
+    void GetCoordinaterotatedAround(const Vec2 &rhs, float radiant)
+    {
+        Vec2 cpy = rhs;
+        Vec2 diff = this - rhs;
+        float _cos = cos(radiant);
+        float _sin = sin(radiant);
+        return cpy + Vec2(diff.x * _cos - diff.y * _sin, diff.x * _sin + diff.y * _cos);
+    }
+
+    Vec2 linearInterpolation(const Vec2 &rhs, float percent) // percent must be a value between 0 and 1
+    {
+        if (percent < 0 || percent > 1)
+            return Vec2(0,0);
+        return this + ((rhs - this) * percent);
+    }
+
     float angle(const Vec2 &rhs) const
     {
         float tmp = atan2(rhs.y - y, rhs.x - x);
-        tmp = tmp * 180 / 3.14159265358979323846;
+        tmp = tmp * 180 / PI;
         if (tmp < 0)
             tmp += 360;
         return tmp;

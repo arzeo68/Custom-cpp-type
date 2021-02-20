@@ -28,7 +28,7 @@ class Vec2
 
     bool operator!=(const Vec2 &rhs) const
     {
-        return rhs != *this;
+        return x != rhs.x || y != rhs.y;
     };
 
     bool operator<(const Vec2 &rhs) const
@@ -98,22 +98,22 @@ class Vec2
 
     Vec2 operator+(const Vec2 &rhs) const
     {
-        return Vec2<t>(x + rhs.y, x + rhs.y);
+        return Vec2<t>(x + rhs.x, y + rhs.y);
     };
 
     Vec2 operator-(const Vec2 &rhs) const
     {
-        return Vec2<t>(x - rhs.y, x - rhs.y);
+        return Vec2<t>(x - rhs.x, y - rhs.y);
     };
 
     Vec2 operator*(const Vec2 &rhs) const
     {
-        return Vec2<t>(x * rhs.y, x * rhs.y);
+        return Vec2<t>(x * rhs.x, y * rhs.y);
     };
 
     Vec2 operator/(const Vec2 &rhs) const
     {
-        return Vec2<t>(x / rhs.y, x / rhs.y);
+        return Vec2<t>(x / rhs.x, y / rhs.y);
     };
 
     Vec2 operator+(t nb) const
